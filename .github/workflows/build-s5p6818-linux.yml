@@ -97,3 +97,5 @@ jobs:
             --clobber
 
           echo "Release URL: https://github.com/$GITHUB_REPOSITORY/releases/tag/$TAG"
+
+# cloud-build trigger
