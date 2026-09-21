@@ -1,0 +1,99 @@
+name: Build S5P6818 FriendlyCore ARM64
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/build-s5p6818-linux.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+
+    steps:
+      - name: Checkout helper repo
+        uses: actions/checkout@v4
+
+      - name: Free runner disk space
+        run: |
+          df -h
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc /usr/local/.ghcup /opt/hostedtoolcache || true
+          sudo apt-get clean
+          df -h
+
+      - name: Install host tools
+        run: |
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
+            git wget curl ca-certificates xz-utils zstd p7zip-full \
+            kpartx parted dosfstools e2fsprogs util-linux rsync file
+
+      - name: Clone FriendlyElec sd-fuse
+        run: |
+          git clone --depth 1 --branch master \
+            https://github.com/friendlyarm/sd-fuse_s5p6818.git \
+            sd-fuse_s5p6818
+
+      - name: Build FriendlyCore ARM64 SD image
+        working-directory: sd-fuse_s5p6818
+        env:
+          SDFUSE_NONINTERACTIVE: "y"
+        run: |
+          sudo --preserve-env=SDFUSE_NONINTERACTIVE ./mk-sd-image.sh friendlycore-arm64
+          ls -lh out/
+          IMG="$(find out -maxdepth 1 -type f -name 's5p6818-sd-friendlycore-*-arm64-*.img' | head -n1)"
+          test -n "$IMG"
+          echo "IMG=$PWD/$IMG" >> "$GITHUB_ENV"
+          echo "IMG_BASENAME=$(basename "$IMG")" >> "$GITHUB_ENV"
+
+      - name: Verify and package image
+        run: |
+          sha256sum "$IMG" | tee "$IMG.sha256"
+          {
+            echo "Target: S5P6818"
+            echo "OS: FriendlyCore ARM64"
+            echo "Source: https://github.com/friendlyarm/sd-fuse_s5p6818"
+            echo "sd-fuse commit: $(git -C sd-fuse_s5p6818 rev-parse HEAD)"
+            echo "Built at: $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+            echo
+            echo "Image SHA256:"
+            cat "$IMG.sha256"
+          } > BUILD_INFO.txt
+
+          # GitHub release assets must stay below 2 GiB each.
+          # 7-Zip multi-volume archives are easy to restore on Windows.
+          7z a -t7z -mx=5 -m0=lzma2 -v1900m "$IMG.7z" "$IMG"
+          ls -lh "$IMG".7z.* BUILD_INFO.txt "$IMG.sha256"
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="s5p6818-friendlycore-arm64-${GITHUB_RUN_ID}"
+          echo "TAG=$TAG" >> "$GITHUB_ENV"
+          cat > RELEASE_NOTES.md <<EOF
+          S5P6818 FriendlyCore ARM64 SD-card image built from the current FriendlyElec sd-fuse_s5p6818 master branch.
+
+          Download every \`.7z.00x\` part, place them in one folder, then open the \`.7z.001\` file with 7-Zip on Windows to extract the \`.img\` file. Burn the extracted image to the SD card with Win32DiskImager.
+
+          This is the ARM64 Linux test image for validating HDMI/network/VPU hardware video decoding before building the custom TV application.
+          EOF
+
+          gh release create "$TAG" \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "S5P6818 FriendlyCore ARM64 - run ${GITHUB_RUN_NUMBER}" \
+            --notes-file RELEASE_NOTES.md
+
+          gh release upload "$TAG" \
+            "$IMG".7z.* \
+            "$IMG.sha256" \
+            BUILD_INFO.txt \
+            --repo "$GITHUB_REPOSITORY" \
+            --clobber
+
+          echo "Release URL: https://github.com/$GITHUB_REPOSITORY/releases/tag/$TAG"
