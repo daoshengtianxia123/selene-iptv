@@ -106,4 +106,4 @@ https://liveout.xntv.tv/a65jur/96iln2.m3u8
 http://107.150.60.122/live/ssws.m3u8
 # source: collect-iptv
 #EXTINF:-1 tvg-id="大湾区卫视" tvg-name="大湾区卫视" tvg-logo="https://live.fanmingming.cn/tv/大湾区卫视.png" group-title="卫视频道",大湾区卫视
-http://t.061899.xyz/tl/tl.php?id=dwqws
+http://222.128.55.152:9080/live/dwq.m3u8
