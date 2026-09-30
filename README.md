@@ -7,7 +7,7 @@
 Selene-TV 的订阅地址：
 
 ```
-https://raw.githubusercontent.com/daoshengtianxia123/selene-iptv/main/selene-sub.txt
+https://gitee.com/daoshengtianxia/selene-iptv/raw/main/selene-sub.txt
 ```
 
 生成文件：
@@ -36,3 +36,20 @@ python3 scripts/update.py
 ```
 
 也可以在 GitHub 仓库的 **Actions → Update IPTV → Run workflow** 手动运行一次。
+
+
+## 中国大陆镜像
+
+中国大陆 TV 客户端优先使用 Gitee 镜像：
+
+```
+https://gitee.com/daoshengtianxia/selene-iptv/raw/main/selene-sub.txt
+```
+
+生成的 Selene Base58 订阅内部 `live.m3u` 地址也指向 Gitee：
+
+```
+https://gitee.com/daoshengtianxia/selene-iptv/raw/main/live.m3u
+```
+
+GitHub 仓库仍作为上游生成仓库和备用源。
