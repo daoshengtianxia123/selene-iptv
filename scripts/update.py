@@ -8,7 +8,7 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-RAW_BASE = "https://raw.githubusercontent.com/daoshengtianxia123/selene-iptv/main"
+RAW_BASE = "https://gitee.com/daoshengtianxia/selene-iptv/raw/main"
 
 SOURCES = [
     {
