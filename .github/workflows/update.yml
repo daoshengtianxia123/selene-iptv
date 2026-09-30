@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: "23 */6 * * *"
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "scripts/update.py"
+      - ".github/workflows/update.yml"
 
 permissions:
   contents: write
