@@ -70,6 +70,7 @@ PROVINCE_ORDER = [
 ATTR_RE = re.compile(r'([A-Za-z0-9_-]+)="([^"]*)"')
 RESP_RE = re.compile(r"^(\d+)ms$", re.I)
 USER_AGENT = "Mozilla/5.0 selene-iptv-updater/1.0"
+MAX_LINES_PER_CHANNEL = 3
 
 
 def fetch_text(url: str) -> str:
@@ -163,21 +164,52 @@ def candidate_score(entry: dict) -> tuple:
     return (entry["priority"], response_ms(entry))
 
 
-def select_channels(entries: list[dict], kind: str) -> dict[str, dict]:
-    selected: dict[str, dict] = {}
+def select_channels(entries: list[dict], kind: str) -> dict[str, list[dict]]:
+    # 每个频道保留多条候选线路。先按上游优先级/响应时间排序，
+    # 再优先挑不同来源，避免一个上游整体失效时所有备用线一起失效。
+    grouped: dict[str, list[dict]] = {}
 
     for entry in entries:
         name = entry["attrs"].get("tvg-name") or entry["name"]
         key = canonical_cctv(name) if kind == "cctv" else canonical_province(name)
         if not key:
-            # Some lists have the useful display name only after the comma.
             key = canonical_cctv(entry["name"]) if kind == "cctv" else canonical_province(entry["name"])
         if not key:
             continue
+        grouped.setdefault(key, []).append(entry)
 
-        old = selected.get(key)
-        if old is None or candidate_score(entry) < candidate_score(old):
-            selected[key] = entry
+    selected: dict[str, list[dict]] = {}
+    for key, items in grouped.items():
+        ordered = sorted(items, key=candidate_score)
+        chosen: list[dict] = []
+        used_urls: set[str] = set()
+        used_sources: set[str] = set()
+
+        # 第一轮：不同 source 各取一条。
+        for entry in ordered:
+            url = entry.get("url", "")
+            source = entry.get("source", "")
+            if not url or url in used_urls or source in used_sources:
+                continue
+            chosen.append(entry)
+            used_urls.add(url)
+            used_sources.add(source)
+            if len(chosen) >= MAX_LINES_PER_CHANNEL:
+                break
+
+        # 第二轮：来源不够时，再从剩余候选补足。
+        if len(chosen) < MAX_LINES_PER_CHANNEL:
+            for entry in ordered:
+                url = entry.get("url", "")
+                if not url or url in used_urls:
+                    continue
+                chosen.append(entry)
+                used_urls.add(url)
+                if len(chosen) >= MAX_LINES_PER_CHANNEL:
+                    break
+
+        if chosen:
+            selected[key] = chosen
 
     return selected
 
@@ -186,28 +218,29 @@ def esc(value: str) -> str:
     return (value or "").replace("\\", "\\\\").replace('"', '\\"')
 
 
-def make_m3u(selected: dict[str, dict], order: list[str], kind: str) -> str:
+def make_m3u(selected: dict[str, list[dict]], order: list[str], kind: str) -> str:
     lines = ["#EXTM3U"]
     group = "央视频道" if kind == "cctv" else "卫视频道"
 
     for key in order:
-        entry = selected.get(key)
-        if not entry:
+        entries = selected.get(key) or []
+        if not entries:
             continue
 
         display = CCTV_META[key] if kind == "cctv" else key
-        attrs = entry["attrs"]
-        tvg_id = attrs.get("tvg-id") or key
-        logo = attrs.get("tvg-logo", "")
-        source = entry["source"]
+        for line_no, entry in enumerate(entries, start=1):
+            attrs = entry["attrs"]
+            tvg_id = attrs.get("tvg-id") or key
+            logo = attrs.get("tvg-logo", "")
+            source = entry["source"]
 
-        info = (
-            f'#EXTINF:-1 tvg-id="{esc(tvg_id)}" tvg-name="{esc(display)}" '
-            f'tvg-logo="{esc(logo)}" group-title="{group}",{display}'
-        )
-        lines.append(f"# source: {source}")
-        lines.append(info)
-        lines.append(entry["url"])
+            info = (
+                f'#EXTINF:-1 tvg-id="{esc(tvg_id)}" tvg-name="{esc(display)}" '
+                f'tvg-logo="{esc(logo)}" group-title="{group}",{display}'
+            )
+            lines.append(f"# source: {source} line={line_no}/{len(entries)}")
+            lines.append(info)
+            lines.append(entry["url"])
 
     return "\n".join(lines) + "\n"
 
@@ -228,7 +261,7 @@ def b58encode(data: bytes) -> str:
     return ("1" * zeroes) + (encoded or ("" if zeroes else "1"))
 
 
-def write_outputs(cctv: dict[str, dict], province: dict[str, dict]) -> None:
+def write_outputs(cctv: dict[str, list[dict]], province: dict[str, list[dict]]) -> None:
     cctv_text = make_m3u(cctv, CCTV_ORDER, "cctv")
     province_text = make_m3u(province, PROVINCE_ORDER, "province")
 
@@ -283,8 +316,8 @@ def main() -> None:
 
     write_outputs(cctv, province)
 
-    print(f"Generated CCTV channels: {len(cctv)}")
-    print(f"Generated province channels: {len(province)}")
+    print(f"Generated CCTV channels: {len(cctv)}; lines: {sum(len(v) for v in cctv.values())}")
+    print(f"Generated province channels: {len(province)}; lines: {sum(len(v) for v in province.values())}")
     if failures:
         print("Completed with upstream warnings:")
         for item in failures:
