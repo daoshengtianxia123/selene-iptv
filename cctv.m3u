@@ -92,12 +92,12 @@ http://101.66.194.125:9901/tsfile/live/0009_1.m3u8?key=txiptv&playlive=0&authid=
 # source: best-fan-cctv line=1/3
 #EXTINF:-1 tvg-id="CCTV-10" tvg-name="CCTV-10 科教" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV10.png" group-title="央视频道",CCTV-10 科教
 http://124.228.160.112:9901/tsfile/live/0010_1.m3u8?key=txiptv&playlive=1&authid=0
-# source: vbskycn line=2/3
+# source: collect-iptv line=2/3
+#EXTINF:-1 tvg-id="CCTV-10" tvg-name="CCTV-10 科教" tvg-logo="https://live.fanmingming.cn/tv/CCTV10.png" group-title="央视频道",CCTV-10 科教
+http://t.061899.xyz/tl/tl.php?id=cctv10
+# source: vbskycn line=3/3
 #EXTINF:-1 tvg-id="22" tvg-name="CCTV-10 科教" tvg-logo="https://tb.zbds.top/logo/CCTV10.png" group-title="央视频道",CCTV-10 科教
 http://101.66.194.125:9901/tsfile/live/0010_1.m3u8?key=txiptv&playlive=0&authid=0
-# source: best-fan-cctv line=3/3
-#EXTINF:-1 tvg-id="CCTV-10" tvg-name="CCTV-10 科教" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV10.png" group-title="央视频道",CCTV-10 科教
-http://74.91.26.218:82/live/cctv10hd.m3u8
 # source: best-fan-cctv line=1/3
 #EXTINF:-1 tvg-id="CCTV-11" tvg-name="CCTV-11 戏曲" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV11.png" group-title="央视频道",CCTV-11 戏曲
 http://101.66.195.51:9901/tsfile/live/0011_1.m3u8?key=txiptv&playlive=0&authid=0
@@ -163,4 +163,4 @@ http://t.061899.xyz/tl/tl.php?id=cctv17
 http://1.197.250.140:9901/tsfile/live/0007_2.m3u8?key=txiptv&playlive=1&authid=0
 # source: collect-iptv line=1/1
 #EXTINF:-1 tvg-id="CCTV-4K" tvg-name="CCTV-4K 超高清" tvg-logo="https://live.fanmingming.cn/tv/CCTV-4K 高清.png" group-title="央视频道",CCTV-4K 超高清
-https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv4k_mbd.m3u8?auth_key=1791449100-1-b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c-9049cce6b4fccdf8f62241297ddc4d59&yid=b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c
+https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv4k_mbd.m3u8?auth_key=1791482400-1-b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c-79b197cbf1f157557c67f50b8d89c167&yid=b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c
