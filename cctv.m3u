@@ -28,15 +28,15 @@ http://120.40.39.246:352/newlive/live/hls/3/live.m3u8
 http://74.91.26.218:82/live/cctv4hd.m3u8
 # source: collect-iptv line=2/3
 #EXTINF:-1 tvg-id="CCTV-4" tvg-name="CCTV-4 中文国际" tvg-logo="https://live.fanmingming.cn/tv/CCTV-4 中文国际.png" group-title="央视频道",CCTV-4 中文国际
-https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv4_mbd.m3u8?auth_key=1793556000-1-b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c-ef73eefabcf6828e1ee99ac2f73abfb3&yid=b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c
+https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv4_mbd.m3u8?auth_key=1793581200-1-b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c-df4bf0c526bfede30ce7e29599e04277&yid=b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c
 # source: best-fan-cctv line=3/3
 #EXTINF:-1 tvg-id="CCTV-4" tvg-name="CCTV-4 中文国际" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV4.png" group-title="央视频道",CCTV-4 中文国际
 http://207.56.13.146:81/cdnlive/cctv4.m3u8
 # source: best-fan-cctv line=1/3
 #EXTINF:-1 tvg-id="CCTV-5" tvg-name="CCTV-5 体育" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV5.png" group-title="央视频道",CCTV-5 体育
 http://153.0.171.163:85/tsfile/live/1015_1.m3u8?key=txiptv&playlive=1&authid=0
-# source: vbskycn line=2/3
-#EXTINF:-1 tvg-id="88" tvg-name="CCTV-5 体育" tvg-logo="https://tb.zbds.top/logo/CCTV5.png" group-title="央视频道",CCTV-5 体育
+# source: collect-iptv line=2/3
+#EXTINF:-1 tvg-id="CCTV-5" tvg-name="CCTV-5 体育" tvg-logo="https://live.fanmingming.cn/tv/CCTV5.png" group-title="央视频道",CCTV-5 体育
 http://gmxw.7766.org:808/hls/93/index.m3u8
 # source: best-fan-cctv line=3/3
 #EXTINF:-1 tvg-id="CCTV-5" tvg-name="CCTV-5 体育" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV5.png" group-title="央视频道",CCTV-5 体育
@@ -64,7 +64,7 @@ http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv7hd
 http://207.56.13.146:81/cdnlive/cctv8.m3u8
 # source: collect-iptv line=2/3
 #EXTINF:-1 tvg-id="CCTV-8" tvg-name="CCTV-8 电视剧" tvg-logo="https://live.fanmingming.cn/tv/CCTV8.png" group-title="央视频道",CCTV-8 电视剧
-http://124.165.251.82:85/tsfile/live/0008_1.m3u8?key=txiptv&playlive=1&authid=0
+http://gmxw.7766.org:808/hls/96/index.m3u8
 # source: best-fan-cctv line=3/3
 #EXTINF:-1 tvg-id="CCTV8.cn@SD" tvg-name="CCTV-8 电视剧" tvg-logo="" group-title="央视频道",CCTV-8 电视剧
 http://74.91.26.218:82/live/cctv8hd.m3u8
@@ -73,7 +73,7 @@ http://74.91.26.218:82/live/cctv8hd.m3u8
 https://v4-702cae17a28d6e4f0c0002bba021d934.livehwc4.com/play.kankanlive.com/live/1698423397390920.m3u8?sub_m3u8=true&edge_slice=true&user_session_id=600fa219199ab8bd99e8dab7778e6e66
 # source: collect-iptv line=2/3
 #EXTINF:-1 tvg-id="CCTV-9" tvg-name="CCTV-9 纪录" tvg-logo="https://live.fanmingming.cn/tv/CCTV-9 纪录.png" group-title="央视频道",CCTV-9 纪录
-https://v4-702cae17a28d6e4f0c0002bba021d934.livehwc4.com/play.kankanlive.com/live/1698423397390920.m3u8?sub_m3u8=true&edge_slice=true&user_session_id=1cb21e91a08c56ceb1178f366966c3b7
+https://v4-702cae17a28d6e4f0c0002bba021d934.livehwc4.com/play.kankanlive.com/live/1698423397390920.m3u8?sub_m3u8=true&edge_slice=true&user_session_id=ce4edadc2b5419f9fbc9c4eafcebcae2
 # source: best-fan-cctv line=3/3
 #EXTINF:-1 tvg-id="CCTV9.cn@SD" tvg-name="CCTV-9 纪录" tvg-logo="" group-title="央视频道",CCTV-9 纪录
 https://xykt-fix.github.io/Y77.m3u8
@@ -113,14 +113,14 @@ http://204.12.221.218:8181/3m1080p/cctv14.m3u8
 # source: best-fan-cctv line=1/2
 #EXTINF:-1 tvg-id="CCTV15.cn@SD" tvg-name="CCTV-15 音乐" tvg-logo="" group-title="央视频道",CCTV-15 音乐
 http://74.91.26.218:82/live/cctv15hd.m3u8
-# source: vbskycn line=2/2
-#EXTINF:-1 tvg-id="59" tvg-name="CCTV-15 音乐" tvg-logo="https://tb.zbds.top/logo/CCTV15.png" group-title="央视频道",CCTV-15 音乐
+# source: collect-iptv line=2/2
+#EXTINF:-1 tvg-id="CCTV-15" tvg-name="CCTV-15 音乐" tvg-logo="https://live.fanmingming.cn/tv/CCTV15.png" group-title="央视频道",CCTV-15 音乐
 http://gmxw.7766.org:808/hls/102/index.m3u8
 # source: best-fan-cctv line=1/3
 #EXTINF:-1 tvg-id="CCTV-16" tvg-name="CCTV-16 奥林匹克" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV16.png" group-title="央视频道",CCTV-16 奥林匹克
 http://207.56.13.146:81/cdnlive/cctv16.m3u8
-# source: vbskycn line=2/3
-#EXTINF:-1 tvg-id="35" tvg-name="CCTV-16 奥林匹克" tvg-logo="https://tb.zbds.top/logo/CCTV16.png" group-title="央视频道",CCTV-16 奥林匹克
+# source: collect-iptv line=2/3
+#EXTINF:-1 tvg-id="CCTV-16" tvg-name="CCTV-16 奥林匹克" tvg-logo="https://live.fanmingming.cn/tv/CCTV16.png" group-title="央视频道",CCTV-16 奥林匹克
 http://gmxw.7766.org:808/hls/169/index.m3u8
 # source: best-fan-cctv line=3/3
 #EXTINF:-1 tvg-id="CCTV-16" tvg-name="CCTV-16 奥林匹克" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV16.png" group-title="央视频道",CCTV-16 奥林匹克
@@ -128,12 +128,12 @@ http://38.75.136.137:98/gslb/dsdqbv/cctv16hd.m3u8?auth=test20251009
 # source: best-fan-cctv line=1/3
 #EXTINF:-1 tvg-id="CCTV-17" tvg-name="CCTV-17 农业农村" tvg-logo="https://gitee.com/mytv-android/myTVlogo/raw/main/img/CCTV17.png" group-title="央视频道",CCTV-17 农业农村
 http://59.39.89.130:60901/tsfile/live/0017_1.m3u8?key=txiptv&playlive=1&authid=0
-# source: vbskycn line=2/3
-#EXTINF:-1 tvg-id="CCTV-17" tvg-name="CCTV-17 农业农村" tvg-logo="https://tb.zbds.top/logo/CCTV17.png" group-title="央视频道",CCTV-17 农业农村
+# source: collect-iptv line=2/3
+#EXTINF:-1 tvg-id="CCTV-17" tvg-name="CCTV-17 农业农村" tvg-logo="https://live.fanmingming.cn/tv/CCTV17.png" group-title="央视频道",CCTV-17 农业农村
 https://live.264788.xyz/channel/cctv17?streamid=f9c36f1e95b5b35eac89cc89583e7c0a&livekey=01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk
 # source: best-fan-cctv line=3/3
 #EXTINF:-1 tvg-id="CCTV17.cn@HD" tvg-name="CCTV-17 农业农村" tvg-logo="" group-title="央视频道",CCTV-17 农业农村
 http://74.91.26.218:82/live/cctv17hd.m3u8
 # source: collect-iptv line=1/1
 #EXTINF:-1 tvg-id="CCTV-4K" tvg-name="CCTV-4K 超高清" tvg-logo="https://live.fanmingming.cn/tv/CCTV-4K 高清.png" group-title="央视频道",CCTV-4K 超高清
-https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv4k_mbd.m3u8?auth_key=1793556000-1-b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c-2a1b6c6bab494aa48ac8ed60390a6e34&yid=b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c
+https://live-play-hls.cctvnews.cctv.com/CCTVChannel/channel_cctv4k_mbd.m3u8?auth_key=1793581200-1-b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c-cd1f0a496e7a6b287ca3a9ebd010b7ba&yid=b59134a2ead43d7f783f943c8f535e7bb80c5169575b2e8efcd5b3ddea21b41c
